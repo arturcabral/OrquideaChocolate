@@ -16,7 +16,6 @@ public class controleSerial {
       do{ 
           delay(tempoPorInstrucao); 
           respostaArduino = myPort.readString();
-          if( respostaArduino != null ) print(respostaArduino);
       }while(respostaArduino == null || !respostaArduino.trim().equals("wait"));
       print("\t########NOVA OPERACAO ########\n");
     }
@@ -38,18 +37,19 @@ public class controleSerial {
       esperaArduino();
       myPort.write("G28 ; \n");
       esperaArduino();
-      myPort.write("G1 Z5 F5000 ; \n");
-      esperaArduino();
+      //myPort.write("G1 Z5 F5000 ; \n");
+      //esperaArduino();
       myPort.write("G90; \n");
       esperaArduino();
       myPort.write("M82; \n");
       esperaArduino();
-      myPort.write("G92 E0; \n");
-      esperaArduino();
-      myPort.write("G92 E0; \n");
-      esperaArduino();
-      myPort.write("G1 Z0.350 F7800.000; \n");
-      esperaArduino();
+      //myPort.write("G92 E0; \n");
+      //esperaArduino();
+      //myPort.write("G92 E0; \n");
+      //esperaArduino();
+      //myPort.write("G1 Z0.350 F7800.000; \n");
+      //esperaArduino();
+      /*
       myPort.write("G1 E-2.00000 F2400.00000; \n");
       esperaArduino();
       myPort.write("G92 E0; \n");
@@ -60,12 +60,16 @@ public class controleSerial {
       esperaArduino();
       myPort.write("G1 F1199.64 ; \n");
       esperaArduino();
+      */
+      /*
       myPort.write("G1 X94.168 Y91.524 E2.07096; \n");
       esperaArduino();
       myPort.write("G1 X96.320 Y90.731 E2.14192; \n");
       esperaArduino();
       myPort.write("G1 X97.500 Y90.625 E2.17858; \n");
       esperaArduino();
+    */
+
       print("FIM TESTE");
     }
     

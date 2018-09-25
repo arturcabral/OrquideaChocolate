@@ -1,5 +1,5 @@
 import java.util.*;
-final String ApendiceGlobalComando = " E3.000 ";
+final String ApendiceGlobalComando = " E2.17858 ";
 
 
 
@@ -43,7 +43,7 @@ void toGcodeArquivo() {
         }
         endShape();
       }
-      gcodecommand = gcodecommand + penUp;
+      //gcodecommand = gcodecommand + penUp;
 
       if (i == pointPaths.length-1) {
         String[] gcodecommandlist = split(gcodecommand, '\n');
@@ -88,17 +88,17 @@ String[] toGcodeBufferStrings() {
         float xmaped = map(pointPaths[i][j].x, -200, 200, xcoord[1], xcoord[0]);
         float ymaped = map(pointPaths[i][j].y, -200, 200, ycoord[0], ycoord[1]);
         if (j == 1) {
-          gcodecommand = gcodecommand + penDown;
+          //gcodecommand = gcodecommand + penDown;
         }
-        gcodecommand = gcodecommand + "G1 X"+ str(xmaped)+" Y"+str(ymaped) +"\n";
+        gcodecommand = gcodecommand + "G1 X"+ str(xmaped)+" Y"+str(ymaped) +ApendiceGlobalComando+"\n";
       }
       endShape();
     }
-    gcodecommand = gcodecommand + penUp;
+    gcodecommand = gcodecommand + "M72 P2 ;\n";
     if (i == pointPaths.length-1) {
        String[] retornoAuxiliar = split(gcodecommand, '\n');
        for(int k=0; k<retornoAuxiliar.length ; k++) 
-           retornoStrings.add(retornoAuxiliar[k]+ApendiceGlobalComando+"\n");
+           retornoStrings.add(retornoAuxiliar[k]+"\n");
     }
   }
   return retornoStrings.toArray(new String[retornoStrings.size()]);

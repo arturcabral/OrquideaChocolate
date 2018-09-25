@@ -9,8 +9,8 @@ String penDown = "M03 S20 \n";// This settings was made for my custom CNC Drawin
 
 public String[] pontosGcodeBuffer;  //  Buffer de strings com comandos da forma ja calculada
 
-float[] xcoord = { -108, -195};// These variables define the minimum and maximum position of each axis for your output GCode 
-float[] ycoord = { -108, -195};// These settings also change between your configuration
+float[] xcoord = { 0, 50};// These variables define the minimum and maximum position of each axis for your output GCode 
+float[] ycoord = { 0, 50};// These settings also change between your configuration
 
 String gcodecommand ="G0 F16000 \n G0"+ penUp; // String to store the Gcode we wil save later
 
@@ -30,6 +30,10 @@ void setup() {
 }
 
 void draw() {
-    for(String comando :pontosGcodeBuffer)
-        serialControle.mandaComandoGcode(comando);
+    for(String comando :pontosGcodeBuffer){
+            print(comando);
+            serialControle.mandaComandoGcode(comando);
+          
+    }
+        
 }
