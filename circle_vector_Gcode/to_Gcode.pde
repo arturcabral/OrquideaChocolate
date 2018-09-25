@@ -55,7 +55,6 @@ void toGcodeArquivo() {
   }
 }
 
-
 String[] toGcodeBufferStrings() {
   ArrayList <String>retornoStrings = new ArrayList<String>(); 
   RG.init(this);

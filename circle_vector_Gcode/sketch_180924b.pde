@@ -68,6 +68,10 @@ public class controleSerial {
       esperaArduino();
       print("FIM TESTE");
     }
-
-
+    
+    //manda um string de comando na porta serial
+    void mandaComandoGcode(String comando){
+      myPort.write(comando+"; \n");
+      esperaArduino();
+    }
 }

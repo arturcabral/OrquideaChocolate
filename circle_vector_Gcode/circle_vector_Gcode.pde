@@ -12,7 +12,6 @@ public String[] pontosGcodeBuffer;  //  Buffer de strings com comandos da forma 
 float[] xcoord = { -108, -195};// These variables define the minimum and maximum position of each axis for your output GCode 
 float[] ycoord = { -108, -195};// These settings also change between your configuration
 
-
 String gcodecommand ="G0 F16000 \n G0"+ penUp; // String to store the Gcode we wil save later
 
 float xmag, ymag, newYmag, newXmag = 0;
@@ -27,8 +26,10 @@ void setup() {
   size(600, 600, P3D);
   // VERY IMPORTANT: Allways initialize the library before using it
   pontosGcodeBuffer = toGcodeBufferStrings();
-  serialControle = new controleSerial(this);
+  serialControle = new controleSerial(this,true);
 }
 
 void draw() {
+    for(String comando :pontosGcodeBuffer)
+        serialControle.mandaComandoGcode(comando);
 }
