@@ -19,6 +19,9 @@ float z = 0;
 
 boolean ignoringStyles = false;
 boolean estadoImpressoraImprimindo = false;
+
+geradorCirculo controleCirculo; // objeto controlador do gerador do circulo
+
 int filesaved = 0;
 
 
@@ -57,11 +60,17 @@ class obraArte17 implements Runnable{
 
 
 
-
+//FUNCAO SETUP
 void setup() {
+  // Seta os settings da janela e engine de desenho
+  // Seta Frame Rate = 60
+  // Instancia gerador de circulo, controle PARALELO do controle serial da impressora
+  // Da start no programa controlador do controlador da impressora
   size(600, 600, P3D);
+  frameRate(30);
+  controleCirculo = new geradorCirculo(this); 
   // VERY IMPORTANT: Allways initialize the library before using it
-  pontosGcodeBuffer = toGcodeBufferStrings();
+  //pontosGcodeBuffer = toGcodeBufferStrings(controleCirculo);
   obraArte17 controleImpressora = new obraArte17(143);
   new Thread(controleImpressora).start();
   //serialControle = new controleSerial(this,true);
@@ -70,11 +79,14 @@ void setup() {
 
 
 void draw() {
+    //Background para limpar a cena
+    background(000);
     if (keyPressed && key == ENTER && !estadoImpressoraImprimindo){
         estadoImpressoraImprimindo = true;
         print("\t################## DETECTEI ENTER ##################\n");
     }
-        
+    controleCirculo.circulo();  
+    controleCirculo.desenhaCirculo();
     //print("\t################## to no DELAY !##################\n");
     //delay(3000);
 }

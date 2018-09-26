@@ -2,7 +2,7 @@ import java.util.*;
 final String ApendiceGlobalComando = " E2.17858 ";
 
 
-
+/*
 void toGcodeArquivo() {
 
   RG.init(this);
@@ -54,15 +54,12 @@ void toGcodeArquivo() {
     }
   }
 }
-
-String[] toGcodeBufferStrings() {
+*/
+String[] toGcodeBufferStrings(geradorCirculo controleCirculo) {
   ArrayList <String>retornoStrings = new ArrayList<String>(); 
-  RG.init(this);
-  RG.ignoreStyles(ignoringStyles);
-  RG.setPolygonizer(RG.ADAPTATIVE);
-  circulo();
-  grp = circulo;
-  grp.centerIn(g, 100, 1, 1);
+  controleCirculo.circulo();
+  grp = controleCirculo.circulo;
+  grp.centerIn(g, 100, 1, 1);  
   pointPaths = grp.getPointsInPaths();
   translate(width/2, height/2);
   newXmag = mouseX/float(width) * TWO_PI;
