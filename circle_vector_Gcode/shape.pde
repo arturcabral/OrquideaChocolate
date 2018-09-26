@@ -1,4 +1,4 @@
-boolean active = true;
+public boolean active = true;
 int NUM = 100;
 float a = 0 ;
 float r = 100;
