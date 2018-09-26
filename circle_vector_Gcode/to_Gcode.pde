@@ -57,7 +57,7 @@ void toGcodeArquivo() {
 */
 String[] toGcodeBufferStrings(geradorCirculo controleCirculo) {
   ArrayList <String>retornoStrings = new ArrayList<String>(); 
-  controleCirculo.circulo();
+  controleCirculo.circulo(true);
   grp = controleCirculo.circulo;
   grp.centerIn(g, 100, 1, 1);  
   pointPaths = grp.getPointsInPaths();

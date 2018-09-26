@@ -19,6 +19,8 @@ float z = 0;
 
 boolean ignoringStyles = false;
 boolean estadoImpressoraImprimindo = false;
+boolean active = false; // BOOLEANO dizendo que vai ter noise
+
 
 geradorCirculo controleCirculo; // objeto controlador do gerador do circulo
 
@@ -49,7 +51,8 @@ class obraArte17 implements Runnable{
                 */
                 delay(4000);
                 print("\t################## fim da IMPRESSAO pela impressora 3D##################\n");
-                estadoImpressoraImprimindo = false;        
+                estadoImpressoraImprimindo = false;  
+                active = false;
             }
         }
     }
@@ -83,9 +86,10 @@ void draw() {
     background(000);
     if (keyPressed && key == ENTER && !estadoImpressoraImprimindo){
         estadoImpressoraImprimindo = true;
+        active = true;
         print("\t################## DETECTEI ENTER ##################\n");
     }
-    controleCirculo.circulo();  
+    controleCirculo.circulo(active);  
     controleCirculo.desenhaCirculo();
     //print("\t################## to no DELAY !##################\n");
     //delay(3000);

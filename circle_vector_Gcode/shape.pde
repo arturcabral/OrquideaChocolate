@@ -1,7 +1,6 @@
 
 public class geradorCirculo{
   
-    public  boolean active = true;
     private int NUM = 100;
     private int intervaloAtualPontos = 0;
     private int comprimentoIntervalo = 10;
@@ -21,7 +20,7 @@ public class geradorCirculo{
         ultimoY = (r * sin(a));
     }
     
-    synchronized void circulo() {
+    synchronized void circulo(boolean active) {
       int j;
       this.circulo.addMoveTo(( ultimoX), (ultimoY));
       for (j = 0; j < comprimentoIntervalo; j++) {
