@@ -1,13 +1,11 @@
 import processing.serial.*;
 
 
-public class controleSerial {
+public class controleSerial  {
     //CAMPOS
     private Serial myPort;
     private int tempoPorInstrucao = 250;
-    
-    
-    
+
     
     //#################### METODOS ####################
     //Funcao que espera o arduino estar em wait
@@ -20,6 +18,7 @@ public class controleSerial {
       print("\t########NOVA OPERACAO ########\n");
     }
     
+   
     //#################### CONTRUTORES //####################
     
     //Construtor que instancia o comunicador com a porta serial

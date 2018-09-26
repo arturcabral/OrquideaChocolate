@@ -18,31 +18,63 @@ float xmag, ymag, newYmag, newXmag = 0;
 float z = 0;
 
 boolean ignoringStyles = false;
+boolean estadoImpressoraImprimindo = false;
 int filesaved = 0;
 
-public controleSerial serialControle ; // Controlador para mandar via interface serial!
+
+class obraArte17 implements Runnable{
+    public controleSerial serialControle ; // Controlador para mandar via interface serial!
+    long minPrime;
+    
+    obraArte17(long minPrime) {
+         this.minPrime = minPrime;
+    }
+        
+    //  Thread com comportamento utilizada para ser feito em paralelo para imprimir
+    public void run(){
+        while(true){
+            print("\t################## RODANDO ##################\n");
+            delay(2000);
+            //testa se eh coded por que nao sei
+            if(estadoImpressoraImprimindo){
+                print("\t################## IMPRIME pela impressora 3D##################\n");    
+                /*for(String comando :pontosGcodeBuffer){
+                        print(comando);
+                        serialControle.mandaComandoGcode(comando);
+                      
+                }
+                */
+                delay(4000);
+                print("\t################## fim da IMPRESSAO pela impressora 3D##################\n");
+                estadoImpressoraImprimindo = false;        
+            }
+        }
+    }
+    
+}
+
+
+
+
+
 
 void setup() {
   size(600, 600, P3D);
   // VERY IMPORTANT: Allways initialize the library before using it
   pontosGcodeBuffer = toGcodeBufferStrings();
+  obraArte17 controleImpressora = new obraArte17(143);
+  new Thread(controleImpressora).start();
   //serialControle = new controleSerial(this,true);
 }
 
-//Evento chamado para acontecer apos pressionar da tecla
-void keyPressed(){
-    //testa se eh coded por que nao sei
-    if(key == ENTER)
-        print("\t################## IMPRIME pela impressora 3D##################\n");
-}
 
 
 void draw() {
-    /*for(String comando :pontosGcodeBuffer){
-            print(comando);
-            serialControle.mandaComandoGcode(comando);
-          
+    if (keyPressed && key == ENTER && !estadoImpressoraImprimindo){
+        estadoImpressoraImprimindo = true;
+        print("\t################## DETECTEI ENTER ##################\n");
     }
-    */
         
+    //print("\t################## to no DELAY !##################\n");
+    //delay(3000);
 }
