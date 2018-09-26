@@ -26,14 +26,23 @@ void setup() {
   size(600, 600, P3D);
   // VERY IMPORTANT: Allways initialize the library before using it
   pontosGcodeBuffer = toGcodeBufferStrings();
-  serialControle = new controleSerial(this,true);
+  //serialControle = new controleSerial(this,true);
 }
 
+//Evento chamado para acontecer apos pressionar da tecla
+void keyPressed(){
+    //testa se eh coded por que nao sei
+    if(key == ENTER)
+        print("\t################## IMPRIME pela impressora 3D##################\n");
+}
+
+
 void draw() {
-    for(String comando :pontosGcodeBuffer){
+    /*for(String comando :pontosGcodeBuffer){
             print(comando);
             serialControle.mandaComandoGcode(comando);
           
     }
+    */
         
 }
