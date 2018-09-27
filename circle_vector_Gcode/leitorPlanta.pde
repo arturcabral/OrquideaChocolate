@@ -4,6 +4,7 @@ public class leitorPlanta implements Runnable{
     private Serial myPort;
     private int xPos = 0;         // horizontal position of the graph
     private PVector pontoAntigo = new PVector(0,0);
+    private long intervaloValoresPlanta = 20000;
       
     leitorPlanta(PApplet parent){
         myPort = new Serial(parent, Serial.list()[1], 9600);
@@ -24,7 +25,7 @@ public class leitorPlanta implements Runnable{
         if (inString != null) {
           inString = trim(inString);
           print("\t################## VALOR RETORNADO PELA PLANTA"+ inString+"##################\n");
-          return float(inString); 
+          return float(inString) % intervaloValoresPlanta; 
         }
         else return 0.0;
     }
