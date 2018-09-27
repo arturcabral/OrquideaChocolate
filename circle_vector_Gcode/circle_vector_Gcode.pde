@@ -23,6 +23,7 @@ int filesaved = 0;
 public controleSerial serialControle ; // Controlador para mandar via interface serial!
 public leitorPlanta leitor ; // Controlador para mandar via interface serial!
 public GeradorCirculo controlador; // Controlador para o circulo e formatos
+public TradutorGcode tradutorGcode; // Controlador para o tradutor de circulos para GCODE 
 
 class obraArte17 implements Runnable{
     long minPrime;
@@ -68,9 +69,8 @@ void setup() {
   serialControle = new controleSerial(this,true);
   leitor = new leitorPlanta(this);
   controlador = new GeradorCirculo();
+  tradutorGcode = new TradutorGcode();
 }
-
-
 
 synchronized void draw() {
     
@@ -79,7 +79,7 @@ synchronized void draw() {
     if (keyPressed && key == ENTER && !estadoImpressoraImprimindo){
         estadoImpressoraImprimindo = true;
         // VERY IMPORTANT: Allways initialize the library before using it
-        pontosGcodeBuffer = toGcodeBufferStrings(controlador,leitor.retornaValorLidoPlanta());
+        pontosGcodeBuffer = tradutorGcode.toGcodeBufferStrings(this,controlador,leitor.retornaValorLidoPlanta());
         print("\t################## DETECTEI ENTER ##################\n");
     } 
     //print("\t################## to no DELAY !##################\n");
