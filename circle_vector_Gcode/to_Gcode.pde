@@ -1,8 +1,9 @@
 import java.util.*;
-final String ApendiceGlobalComando = " E2.17858 ";
-
-
-
+double ApendiceGlobalComando = 2.17858;
+final float incrementoExtrusora = 1;
+int pontoYRelativo = 75/2;
+int pontoXRelativo = 75/2;
+/*
 void toGcodeArquivo() {
 
   RG.init(this);
@@ -54,13 +55,13 @@ void toGcodeArquivo() {
     }
   }
 }
-
-String[] toGcodeBufferStrings() {
+*/
+String[] toGcodeBufferStrings(float intensidadeNoise) {
   ArrayList <String>retornoStrings = new ArrayList<String>(); 
   RG.init(this);
   RG.ignoreStyles(ignoringStyles);
   RG.setPolygonizer(RG.ADAPTATIVE);
-  circulo();
+  circulo(intensidadeNoise);
   grp = circulo;
   grp.centerIn(g, 100, 1, 1);
   pointPaths = grp.getPointsInPaths();
@@ -90,7 +91,8 @@ String[] toGcodeBufferStrings() {
         if (j == 1) {
           //gcodecommand = gcodecommand + penDown;
         }
-        gcodecommand = gcodecommand + "G1 X"+ str(xmaped)+" Y"+str(ymaped) +ApendiceGlobalComando+"\n";
+        ApendiceGlobalComando += incrementoExtrusora ;
+        gcodecommand = gcodecommand + "G1 X"+ str(xmaped+pontoXRelativo)+" Y"+str(ymaped+pontoYRelativo) +" E"+ApendiceGlobalComando+"; \n";
       }
       endShape();
     }

@@ -22,32 +22,34 @@ public class controleSerial  {
     //#################### CONTRUTORES //####################
     
     //Construtor que instancia o comunicador com a porta serial
-    public controleSerial(PApplet parent,boolean mandaCabecalho){
-      this.myPort=new Serial(parent, Serial.list()[0], 115200);
+    public  controleSerial(PApplet parent,boolean mandaCabecalho){
+      instanciarSerial(parent);
       delay(3000);
       if(mandaCabecalho)
           this.mandaCabecalhoGCode();
     }
+    
+     public synchronized void instanciarSerial(PApplet parent){
+         this.myPort=new Serial(parent, Serial.list()[0], 115200);
+     }
     //Metodo de enviar o cabecalho para fazer mandar o inicio da comunicacao serial com a impressora
     void mandaCabecalhoGCode() {
-      myPort.write("M107; \n");
+      myPort.write("M302 P1; \n");    // Permite extrusao a frio 
       esperaArduino();
-      myPort.write("M302 P1; \n");
-      esperaArduino();
-      myPort.write("G28 ; \n");
+      myPort.write("G28 ; \n");       // Volta pra casa 
       esperaArduino();
       //myPort.write("G1 Z5 F5000 ; \n");
       //esperaArduino();
-      myPort.write("G90; \n");
+  
+      myPort.write("G90; \n");        // Define as posicoes seguintes como absoluta(90) ou relativa(91)  
+      esperaArduino();  
+      myPort.write("M82; \n");        // Seta a extrusora como modo absoluto
       esperaArduino();
-      myPort.write("M82; \n");
+      
+      myPort.write("G92 E0; \n");
       esperaArduino();
-      //myPort.write("G92 E0; \n");
-      //esperaArduino();
-      //myPort.write("G92 E0; \n");
-      //esperaArduino();
-      //myPort.write("G1 Z0.350 F7800.000; \n");
-      //esperaArduino();
+      myPort.write("G1 F7800.000; \n");
+      esperaArduino();
       /*
       myPort.write("G1 E-2.00000 F2400.00000; \n");
       esperaArduino();

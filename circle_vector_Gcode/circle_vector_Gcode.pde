@@ -9,8 +9,8 @@ String penDown = "M03 S20 \n";// This settings was made for my custom CNC Drawin
 
 public String[] pontosGcodeBuffer;  //  Buffer de strings com comandos da forma ja calculada
 
-float[] xcoord = { 0, 50};// These variables define the minimum and maximum position of each axis for your output GCode 
-float[] ycoord = { 0, 50};// These settings also change between your configuration
+float[] xcoord = { 0, 75};// These variables define the minimum and maximum position of each axis for your output GCode 
+float[] ycoord = {0, 75};// These settings also change between your configuration
 
 String gcodecommand ="G0 F16000 \n G0"+ penUp; // String to store the Gcode we wil save later
 
@@ -20,10 +20,11 @@ float z = 0;
 boolean ignoringStyles = false;
 boolean estadoImpressoraImprimindo = false;
 int filesaved = 0;
-
+public controleSerial serialControle ; // Controlador para mandar via interface serial!
+public leitorPlanta leitor ; // Controlador para mandar via interface serial!
+    
 
 class obraArte17 implements Runnable{
-    public controleSerial serialControle ; // Controlador para mandar via interface serial!
     long minPrime;
     
     obraArte17(long minPrime) {
@@ -38,15 +39,17 @@ class obraArte17 implements Runnable{
             //testa se eh coded por que nao sei
             if(estadoImpressoraImprimindo){
                 print("\t################## IMPRIME pela impressora 3D##################\n");    
-                /*for(String comando :pontosGcodeBuffer){
+                while(pontosGcodeBuffer == null);     // ESPERA chegar as listas do pontos em Gcode
+                for(String comando :pontosGcodeBuffer){
                         print(comando);
                         serialControle.mandaComandoGcode(comando);
                       
                 }
-                */
+                
                 delay(4000);
                 print("\t################## fim da IMPRESSAO pela impressora 3D##################\n");
-                estadoImpressoraImprimindo = false;        
+                estadoImpressoraImprimindo = false;   
+                pontosGcodeBuffer = null;
             }
         }
     }
@@ -60,21 +63,24 @@ class obraArte17 implements Runnable{
 
 void setup() {
   size(600, 600, P3D);
-  // VERY IMPORTANT: Allways initialize the library before using it
-  pontosGcodeBuffer = toGcodeBufferStrings();
   obraArte17 controleImpressora = new obraArte17(143);
   new Thread(controleImpressora).start();
-  //serialControle = new controleSerial(this,true);
+  serialControle = new controleSerial(this,true);
+  leitor = new leitorPlanta(this);
 }
 
 
 
-void draw() {
+synchronized void draw() {
+    
+    if(!estadoImpressoraImprimindo)
+        leitor.desenhaGraficoPlanta();
     if (keyPressed && key == ENTER && !estadoImpressoraImprimindo){
         estadoImpressoraImprimindo = true;
+        // VERY IMPORTANT: Allways initialize the library before using it
+        pontosGcodeBuffer = toGcodeBufferStrings(leitor.retornaValorLidoPlanta());
         print("\t################## DETECTEI ENTER ##################\n");
-    }
-        
+    } 
     //print("\t################## to no DELAY !##################\n");
     //delay(3000);
 }
