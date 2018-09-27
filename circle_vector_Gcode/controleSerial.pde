@@ -4,18 +4,18 @@ import processing.serial.*;
 public class controleSerial {
   //CAMPOS
   private Serial myPort;
-  private int tempoPorInstrucao = 250;
+  private int tempoPorInstrucao = 150;
 
 
   //#################### METODOS ####################
   //Funcao que espera o arduino estar em wait
   void esperaArduino() {
     String respostaArduino;
-    do { 
+    //do { 
       delay(tempoPorInstrucao); 
-      respostaArduino = myPort.readString();
-    } while (respostaArduino == null || !respostaArduino.trim().equals("wait"));
-    print("\t########NOVA OPERACAO ########\n");
+    //  respostaArduino = myPort.readString();
+    //} while (respostaArduino == null || !respostaArduino.trim().equals("wait"));
+    //print("\t########NOVA OPERACAO ########\n");
   }
 
 

@@ -24,7 +24,6 @@ public class leitorPlanta implements Runnable {
     String inString = myPort.readStringUntil('\n');
     if (inString != null) {
       inString = trim(inString);
-      print("\t################## VALOR RETORNADO PELA PLANTA "+ inString+"##################\n");
       return float(inString) % intervaloValoresPlanta - 97.75;
     } else return 0.0;
   }

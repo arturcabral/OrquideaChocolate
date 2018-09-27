@@ -26,8 +26,6 @@ public class GeradorCirculo {
         intensidadeNoise = 1890.55;
       }
       float noise = map(intensidadeNoise, 0, 20000, 0, 5);
-
-      print("\t################## VALOR MAPEADO PARA NOISE = "+noise+"##################\n");
       t = t+ noise; //intensidade do ruido 
       float n = noise(t);
       n = map(n, 0, 1, 100, 100+50);
@@ -36,6 +34,12 @@ public class GeradorCirculo {
       }
       circulo.addLineTo(x, y);
     }
+    
     circulo.addClose();
   }
+  
+  void limpaCirculo(){
+      this.circulo = new RShape();
+  }
+  
 }

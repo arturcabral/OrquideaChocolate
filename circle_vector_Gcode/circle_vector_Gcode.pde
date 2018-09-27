@@ -10,8 +10,6 @@ public String[] pontosGcodeBuffer;  //  Buffer de strings com comandos da forma 
 float[] xcoord = { 0, 75};// These variables define the minimum and maximum position of each axis for your output GCode 
 float[] ycoord = {0, 75};// These settings also change between your configuration
 
-String gcodecommand;
-
 float xmag, ymag, newYmag, newXmag = 0;
 float z = 0;
 
@@ -34,7 +32,7 @@ class obraArte17 implements Runnable {
   }
 
   //  Thread com comportamento utilizada para ser feito em paralelo para imprimir
-  public void run() {
+  public synchronized void run() {
     while (true) {
       print("\t################## RODANDO ##################\n");
       delay(2000);
@@ -48,11 +46,9 @@ class obraArte17 implements Runnable {
           if (!estadoImpressoraImprimindo)
             break;
         }
-
-        delay(4000);
-        print("\t################## fim da IMPRESSAO pela impressora 3D##################\n");
+        print("\t############## fim da IMPRESSAO pela impressora 3D##################\n");
+        pontosGcodeBuffer = null;        
         estadoImpressoraImprimindo = false;   
-        pontosGcodeBuffer = null;
       }
     }
   }
@@ -78,7 +74,6 @@ synchronized void draw() {
     // VERY IMPORTANT: Allways initialize the library before using it
     background(0, 133, 232);
     pontosGcodeBuffer = tradutorGcode.toGcodeBufferStrings(this, controladorCirculo, leitor.retornaValorLidoPlanta());
-    controladorCirculo = new GeradorCirculo();
     print("\t################## DETECTEI ENTER ##################\n");
   } 
   if (keyPressed && key == 'k')
