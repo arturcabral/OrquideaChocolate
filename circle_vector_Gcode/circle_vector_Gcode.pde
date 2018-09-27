@@ -70,7 +70,7 @@ void setup() {
   // Instancia gerador de circulo, controle PARALELO do controle serial da impressora
   // Da start no programa controlador do controlador da impressora
   size(600, 600, P3D);
-  frameRate(30);
+  frameRate(60);
   controleCirculo = new geradorCirculo(this); 
   // VERY IMPORTANT: Allways initialize the library before using it
   //pontosGcodeBuffer = toGcodeBufferStrings(controleCirculo);

@@ -71,11 +71,11 @@ String[] toGcodeBufferStrings(geradorCirculo controleCirculo) {
   diff = ymag-newYmag;
   if (abs(diff) >  0.01) { 
     ymag -= diff/4.0;
-  }
-  rotateX(-ymag); 
-  rotateY(-xmag); 
+  } 
   background(0);
   stroke(255);
+  rotateX(-ymag); 
+  rotateY(-xmag);
   noFill();
   for (int i = 0; i<pointPaths.length; i++) {
     if (pointPaths[i] != null) {
