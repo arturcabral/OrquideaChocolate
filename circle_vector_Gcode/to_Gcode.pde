@@ -56,13 +56,13 @@ void toGcodeArquivo() {
   }
 }
 */
-String[] toGcodeBufferStrings(float intensidadeNoise) {
+String[] toGcodeBufferStrings(GeradorCirculo controlador,float intensidadeNoise) {
   ArrayList <String>retornoStrings = new ArrayList<String>(); 
   RG.init(this);
   RG.ignoreStyles(ignoringStyles);
   RG.setPolygonizer(RG.ADAPTATIVE);
-  circulo(intensidadeNoise);
-  grp = circulo;
+  controlador.circulo(intensidadeNoise);
+  grp = controlador.circulo;
   grp.centerIn(g, 100, 1, 1);
   pointPaths = grp.getPointsInPaths();
   translate(width/2, height/2);
