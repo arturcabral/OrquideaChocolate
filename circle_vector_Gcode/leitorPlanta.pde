@@ -31,6 +31,7 @@ public class leitorPlanta implements Runnable {
   void desenhaGraficoPlanta() {
     float inByte = retornaValorLidoPlanta(); 
     inByte = map(inByte, 97, 30000, height/2, height - 100);
+     myPort.write("G10; \n"); 
     //println(inByte);
     textSize(32);
     text("orchis_food", 25, 43); 

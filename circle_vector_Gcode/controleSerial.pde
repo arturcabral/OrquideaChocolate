@@ -4,7 +4,7 @@ import processing.serial.*;
 public class controleSerial {
   //CAMPOS
   private Serial myPort;
-  private int tempoPorInstrucao = 150;
+  private int tempoPorInstrucao = 450;
 
 
   //#################### METODOS ####################
