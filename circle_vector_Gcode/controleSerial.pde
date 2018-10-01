@@ -30,7 +30,7 @@ public class controleSerial {
   }
 
   public synchronized void instanciarSerial(PApplet parent) {
-    this.myPort=new Serial(parent, Serial.list()[0], 115200); //<>// //<>//
+    this.myPort=new Serial(parent, Serial.list()[0], 115200); //<>//
   }
   //Metodo de enviar o cabecalho para fazer mandar o inicio da comunicacao serial com a impressora
   void mandaCabecalhoGCode() {
@@ -42,7 +42,6 @@ public class controleSerial {
     esperaArduino();  
     myPort.write("M82; \n");        // Seta a extrusora como modo absoluto
     esperaArduino();
-
     myPort.write("G92 E0; \n");
     esperaArduino();
     myPort.write("G1 F7800.000; \n");
@@ -69,6 +68,14 @@ public class controleSerial {
      */
 
     print("FIM TESTE");
+  }
+  //
+  void modoEsperaChocolate(){
+    print("################### STANDBY! ###################\n");
+    myPort.write("G1 E-0.5 \n");
+    esperaArduino();
+    myPort.write("G92 E0; \n");
+    esperaArduino();
   }
 
   //manda um string de comando na porta serial

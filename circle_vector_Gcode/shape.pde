@@ -14,15 +14,15 @@ public class GeradorCirculo {
   public void circulo(float intensidadeNoise) {
     if (active) { 
       r = map((noise(t)), 0, 1, 100, 100+50);
-    } //solução ponto morto
-
+    } //solução ponto morto //<>//
+    print("\t################# NOISE = "+intensidadeNoise+"#################\n");
     circulo.addMoveTo(( r * cos(a)), (r * sin(a)));
 
     for (int i = 0; i < NUM; i ++) {
       float x = r * cos(a);
       float y = r * sin(a);
       a =  a + TWO_PI/NUM;
-      if (intensidadeNoise == 0) {
+      if ((int)intensidadeNoise == 0) {
         intensidadeNoise = 1890.55;
       }
       float noise = map(intensidadeNoise, 0, 20000, 0, 5);

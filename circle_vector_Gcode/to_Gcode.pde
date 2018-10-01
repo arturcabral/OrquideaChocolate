@@ -21,10 +21,21 @@ public class TradutorGcode {
     this.pontoXRelativo = pontoXRelativo;
     this.pontoYRelativo = pontoYRelativo;
   }
+  // Funcao que retorna comandos para
+  // reconfigura o gcode para estar pronto pra extrusar.
+  String[] configuracaoInicialExtrusao(){
+      ArrayList <String> listaComandosSetup = new ArrayList<String>();
+      listaComandosSetup.add("M302 P1; \n");
+      listaComandosSetup.add("G90; \n");
+      listaComandosSetup.add("M302 P1; \n");
+      listaComandosSetup.add("M82 ; \n");
+      listaComandosSetup.add("G1 F7800.000 ; \n");
+      return listaComandosSetup.toArray(new String[listaComandosSetup.size()]);
+  }
+
 
   String[] toGcodeBufferStrings(PApplet parent, GeradorCirculo controlador, float intensidadeNoise) {
     ArrayList <String>retornoStrings = new ArrayList<String>(); 
-    String[] BufferRetorno = null;
     StringBuilder gcodecommand = new StringBuilder();
     RG.init(parent);
     RG.ignoreStyles(ignoringStyles);
@@ -60,6 +71,7 @@ public class TradutorGcode {
     }
     print("\t################## PONTOS ="+retornoStrings.size()+"################## \n");
     controlador.limpaCirculo();
+    this.ApendiceGlobalComando = 0.0;
     return retornoStrings.toArray(new String[retornoStrings.size()]);
   }
 }

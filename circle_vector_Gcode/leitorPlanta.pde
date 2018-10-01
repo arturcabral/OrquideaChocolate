@@ -24,15 +24,13 @@ public class leitorPlanta implements Runnable {
     String inString = myPort.readStringUntil('\n');
     if (inString != null) {
       inString = trim(inString);
-      return float(inString) % intervaloValoresPlanta - 97.75;
+      return int(inString) % intervaloValoresPlanta - 97.75;
     } else return 0.0;
   }
 
   void desenhaGraficoPlanta() {
     float inByte = retornaValorLidoPlanta(); 
     inByte = map(inByte, 97, 30000, height/2, height - 100);
-     myPort.write("G10; \n"); 
-    //println(inByte);
     textSize(32);
     text("orchis_food", 25, 43); 
     stroke(255);
