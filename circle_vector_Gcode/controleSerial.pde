@@ -72,7 +72,7 @@ public class controleSerial {
   //
   void modoEsperaChocolate(){
     print("################### STANDBY! ###################\n");
-    myPort.write("G1 E-0.5 \n");
+    myPort.write("G1 E-2.0 \n");
     esperaArduino();
     myPort.write("G92 E0; \n");
     esperaArduino();

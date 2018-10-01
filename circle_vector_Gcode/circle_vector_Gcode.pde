@@ -77,6 +77,4 @@ synchronized void draw() {
   } 
   if (keyPressed && key == 'k')
     estadoImpressoraImprimindo =false;     
-  //print("\t################## to no DELAY !##################\n");
-  //delay(3000);
 }
