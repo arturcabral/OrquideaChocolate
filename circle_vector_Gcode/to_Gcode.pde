@@ -62,6 +62,7 @@ public class TradutorGcode {
         }
         endShape();
       }
+      gcodecommand.append("G92 E0; \n");
       gcodecommand.append( "M300 S300 P1000 ;\n");
       if (i == pointPaths.length-1) {
         String[] retornoAuxiliar = split(gcodecommand.toString(), '\n');

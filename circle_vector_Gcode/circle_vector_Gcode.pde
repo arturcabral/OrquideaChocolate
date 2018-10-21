@@ -5,8 +5,8 @@ RPoint[][] pointPaths;
 
 public String[] pontosGcodeBuffer;  //  Buffer de strings com comandos da forma ja calculada
 
-float[] xcoord = { 0, 75};// These variables define the minimum and maximum position of each axis for your output GCode 
-float[] ycoord = {0, 75};// These settings also change between your configuration
+float[] xcoord = { 0, 80};// These variables define the minimum and maximum position of each axis for your output GCode 
+float[] ycoord = {0, 80};// These settings also change between your configuration
 
 float xmag, ymag, newYmag, newXmag = 0;
 float z = 0;
@@ -55,7 +55,7 @@ class obraArte17 implements Runnable {
 }
 
 void setup() {
-  size(800, 600, P3D);
+  fullScreen();
   background(0, 133, 232);
   serialControle = new controleSerial(this, true);
   leitor = new leitorPlanta(this);
