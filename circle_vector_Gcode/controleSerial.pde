@@ -5,7 +5,7 @@ public class controleSerial {
   //CAMPOS
   private Serial myPort;
   private int tempoPorInstrucao = 150;
-
+  private final int PASSOREBOBINA = -100;
 
   //#################### METODOS ####################
   //Funcao que espera o arduino estar em wait
@@ -74,6 +74,13 @@ public class controleSerial {
     print("################### STANDBY! ###################\n");
     //myPort.write("G1 E-2.0 \n");
     //esperaArduino();
+    myPort.write("G92 E0; \n");
+    esperaArduino();
+  }
+  void modoRebobinaExtrusora(){
+    print("################### STANDBY! ###################\n");
+    myPort.write("G1 E"+PASSOREBOBINA+" ;\n");
+    esperaArduino();
     myPort.write("G92 E0; \n");
     esperaArduino();
   }

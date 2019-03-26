@@ -14,7 +14,7 @@ public class leitorPlanta implements Runnable {
 
   void run() {
     while (true) {
-      if (!estadoImpressoraImprimindo) {
+      if (estadosMaquina == ESTADOS.PARADO) {
         desenhaGraficoPlanta();
       }
     }

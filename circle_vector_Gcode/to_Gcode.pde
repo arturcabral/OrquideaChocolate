@@ -80,7 +80,7 @@ public class TradutorGcode {
 
 
   // Funcao prototipo que cria uma lista de Gcode de uma forma com 2 camadas (eixo z)
-  String[] toGcodeBufferStringsVaseMode(PApplet parent, GeradorCirculo controlador, float intensidadeNoise) {
+  String[] toGcodeBufferStringsVaseMode(PApplet parent, GeradorCirculo controlador, float intensidadeNoise, int numeroCamadas) {
     ArrayList <String>retornoStrings = new ArrayList<String>(); 
     StringBuilder gcodecommand = new StringBuilder();
     RG.init(parent);
@@ -114,15 +114,17 @@ public class TradutorGcode {
           retornoStrings.add(retornoAuxiliar[k]+"\n");
       } 
     }
+    // loop de subir para a proxima camada
     // SUBINDO PARA A PROXIMA CAMADA
     // DUPLICANDO PARA A PROXIMA CAMADA
     // adiciona gcode FAZ BARULHO
     // adiciona gcode Volta para casa
-    retornoStrings.add("G1 Z"+ALTURACAMADA+" ;\n");         // Altera a posicao do eixo z, para o comeco da segunda camada
-    for(String aux : (ArrayList<String>)retornoStrings.clone())
-      retornoStrings.add(aux);
+    for(int i = 0;  i < numeroCamadas-1; i++){
+      retornoStrings.add("G1 Z"+ALTURACAMADA*(i+1)+" ;\n");         // Altera a posicao do eixo z, para o comeco da segunda camada
+      for(String aux : (ArrayList<String>)retornoStrings.clone())
+        retornoStrings.add(aux);
+    }
     retornoStrings.add("M300 S300 P1000 ;\n");
-    retornoStrings.add("G28 ;\n");
     print("\t################## PONTOS ="+retornoStrings.size()+"################## \n");
     controlador.limpaCirculo();
     this.ApendiceGlobalComando = 0.0;
