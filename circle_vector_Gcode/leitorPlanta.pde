@@ -1,4 +1,5 @@
 import processing.serial.*;
+//int width2 , height2 = 50;
 
 public class leitorPlanta implements Runnable {
   private Serial myPort;
@@ -6,10 +7,10 @@ public class leitorPlanta implements Runnable {
   private PVector pontoAntigo = new PVector(0, 0);
   private long intervaloValoresPlanta = 20000;
 
-  leitorPlanta(PApplet parent) {
-    myPort = new Serial(parent, Serial.list()[1], 9600);
-    myPort.bufferUntil('\n');
-  }
+      leitorPlanta(PApplet parent) {
+        myPort = new Serial(parent, Serial.list()[1], 9600);
+        myPort.bufferUntil('\n');
+      }
 
   void run() {
     while (true) {

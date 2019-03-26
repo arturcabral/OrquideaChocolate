@@ -42,9 +42,9 @@ public class controleSerial {
     esperaArduino();  
     myPort.write("M82; \n");        // Seta a extrusora como modo absoluto
     esperaArduino();
-    myPort.write("G92 E0; \n");
+    myPort.write("G92 E0; \n"); //zera o comprimeiro do extrusor 
     esperaArduino();
-    myPort.write("G1 F7800.000; \n");
+    myPort.write("G1 F7800.000; \n"); //deposita algo 
     esperaArduino();
     /*
       myPort.write("G1 E-2.00000 F2400.00000; \n");

@@ -55,7 +55,8 @@ class obraArte17 implements Runnable {
 }
 
 void setup() {
-  fullScreen();
+//fullScreen();
+  size(560,420);
   background(0, 133, 232);
   serialControle = new controleSerial(this, true);
   leitor = new leitorPlanta(this);
