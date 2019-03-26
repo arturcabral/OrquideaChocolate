@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.function.Consumer;
 
 public class TradutorGcode {
   //CAMPOS
@@ -111,16 +112,17 @@ public class TradutorGcode {
         String[] retornoAuxiliar = split(gcodecommand.toString(), '\n');
         for (int k=0; k<retornoAuxiliar.length; k++) 
           retornoStrings.add(retornoAuxiliar[k]+"\n");
-      }
-      gcodecommand.append("G1 Z"+ALTURACAMADA+" \n");         // Altera a posicao do eixo z, para o comeco da segunda camada
-      if (i == pointPaths.length-1) {
-        String[] retornoAuxiliar = split(gcodecommand.toString(), '\n');
-        for (int k=0; k<retornoAuxiliar.length; k++) 
-          retornoStrings.add(retornoAuxiliar[k]+"\n");
-      }
-      gcodecommand.append("G92 E0; \n");
-      gcodecommand.append( "M300 S300 P1000 ;\n");
+      } 
     }
+    // SUBINDO PARA A PROXIMA CAMADA
+    // DUPLICANDO PARA A PROXIMA CAMADA
+    // adiciona gcode FAZ BARULHO
+    // adiciona gcode Volta para casa
+    retornoStrings.add("G1 Z"+ALTURACAMADA+" ;\n");         // Altera a posicao do eixo z, para o comeco da segunda camada
+    for(String aux : (ArrayList<String>)retornoStrings.clone())
+      retornoStrings.add(aux);
+    retornoStrings.add("M300 S300 P1000 ;\n");
+    retornoStrings.add("G28 ;\n");
     print("\t################## PONTOS ="+retornoStrings.size()+"################## \n");
     controlador.limpaCirculo();
     this.ApendiceGlobalComando = 0.0;

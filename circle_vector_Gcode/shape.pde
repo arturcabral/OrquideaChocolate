@@ -14,7 +14,7 @@ public class GeradorCirculo {
   public void circulo(float intensidadeNoise) {
     if (active) { 
       r = map((noise(t)), 0, 1, 100, 100+50);
-    } //solução ponto morto //<>//
+    } //solução ponto morto //<>// //<>//
     print("\t################# NOISE = "+intensidadeNoise+"#################\n");
     circulo.addMoveTo(( r * cos(a)), (r * sin(a)));
 

@@ -74,7 +74,7 @@ synchronized void draw() {
     estadoImpressoraImprimindo = true;
     // VERY IMPORTANT: Allways initialize the library before using it
     background(0, 133, 232);
-    pontosGcodeBuffer = tradutorGcode.toGcodeBufferStrings(this, controladorCirculo, leitor.retornaValorLidoPlanta());
+    pontosGcodeBuffer = tradutorGcode.toGcodeBufferStringsVaseMode(this, controladorCirculo, leitor.retornaValorLidoPlanta());
   } 
   if (keyPressed && key == 'k')
     estadoImpressoraImprimindo =false;     
